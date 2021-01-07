@@ -2,21 +2,11 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 const exphbs = require('express-handlebars');
+const fortune = require("./lib/fortune.js");
 
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 app.use(express.static(__dirname + '/public'))
-
-
-// fortune cookie
-
-const fortunes= [
-    "Conquer your fears or they will conquer you.",
-    "Rivers need springs.",
-    "Do not fear what you don't know.",
-    "You will have a pleasant surprise.",
-    "Whenever possible, keep it simple.",
-];
 
 // custom routes
 
@@ -25,9 +15,26 @@ app.get(('/'),(req, res) => {
 });
 
 app.get(('/about'),(req, res) => {
-    var randomFortune = 
-        fortunes[Math.floor(Math.random() * fortunes.length)];
-    res.render('about', { fortune: randomFortune});
+    res.render('about', { 
+        fortune: fortune.getFortune(),
+        pageTestScript: '/qa/tests-about.js'
+    });
+});
+
+app.get('/tours/hood-river', (req, res) => {
+    res.render('tours/hood-river');
+})
+
+app.get('/tours/request-group-rate', (req, res) => {
+    res.render('tours/request-group-rate');
+});
+
+// Middleware
+
+app.use((req, res, next) => {
+    res.locals.showTests = app.get('env') !== 'production' &&
+        req.query.test === '1';
+    next();
 });
 
 // custom 404 page
