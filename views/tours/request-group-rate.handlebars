@@ -7,9 +7,13 @@
     <input type="submit" value="Submit">
 </form>
 
-<script>
-    $(document).ready(() => {
-        $('input[name="referrer"]').val(document.referrer);
-    }); 
-    
-</script>
+{{#section}}
+
+    <script>
+        $(document).ready(() => {
+            $('input[name="referrer"]').val(document.referrer);
+        }); 
+        
+    </script>
+
+{{/section }}
