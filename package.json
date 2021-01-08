@@ -9,8 +9,12 @@
   "author": "cally",
   "license": "ISC",
   "dependencies": {
+    "blueimp-file-upload": "^10.31.0",
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.2.0",
+    "formidable": "^1.2.2",
+    "jquery-file-upload-middleware": "^0.1.8",
     "nodemon": "^2.0.6"
   },
   "devDependencies": {
